@@ -57,6 +57,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Blue Carbon theme colors
+        'ocean-blue': "hsl(var(--ocean-blue))",
+        'deep-ocean': "hsl(var(--deep-ocean))",
+        'teal-accent': "hsl(var(--teal-accent))",
+        'carbon-gold': "hsl(var(--carbon-gold))",
+        'success-green': "hsl(var(--success-green))",
+        'warning-amber': "hsl(var(--warning-amber))",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Waves, Wallet, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,20 +15,40 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { signIn, user, profile, loading } = useAuth();
+
+  useEffect(() => {
+    if (user && profile && !loading) {
+      // Redirect based on user role
+      if (profile.role === 'ngo') {
+        navigate("/ngo-dashboard");
+      } else if (profile.role === 'mnc') {
+        navigate("/mnc-dashboard");
+      }
+    }
+  }, [user, profile, loading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate login process
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const { error } = await signIn(email, password);
     
+    if (error) {
+      toast({
+        title: "Login Failed",
+        description: error.message || "Invalid email or password",
+        variant: "destructive"
+      });
+      setIsLoading(false);
+      return;
+    }
+
     toast({
       title: "Login Successful",
       description: "Welcome back to Blue Carbon Ledger!",
     });
     
-    navigate("/dashboard");
     setIsLoading(false);
   };
 

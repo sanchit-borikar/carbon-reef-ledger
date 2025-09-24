@@ -1,23 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { Waves, Wallet, ArrowLeft } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Waves, Wallet, ArrowLeft, Building, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth, UserRole } from "@/hooks/useAuth";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    organizationName: ""
   });
+  const [role, setRole] = useState<UserRole>("ngo");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { signUp, user, profile, loading } = useAuth();
+
+  useEffect(() => {
+    if (user && profile && !loading) {
+      // Redirect based on user role
+      if (profile.role === 'ngo') {
+        navigate("/ngo-dashboard");
+      } else if (profile.role === 'mnc') {
+        navigate("/mnc-dashboard");
+      }
+    }
+  }, [user, profile, loading, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,15 +49,29 @@ const Signup = () => {
       return;
     }
 
-    // Simulate signup process
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    const { error } = await signUp(
+      formData.email, 
+      formData.password, 
+      formData.name, 
+      role, 
+      formData.organizationName
+    );
+
+    if (error) {
+      toast({
+        title: "Signup Failed",
+        description: error.message || "Failed to create account",
+        variant: "destructive"
+      });
+      setIsLoading(false);
+      return;
+    }
+
     toast({
       title: "Account Created",
-      description: "Welcome to Blue Carbon Ledger!",
+      description: "Welcome to Blue Carbon Ledger! Please check your email to confirm your account.",
     });
     
-    navigate("/dashboard");
     setIsLoading(false);
   };
 
@@ -88,6 +118,30 @@ const Signup = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-4">
+                <Label className="text-base font-medium">Account Type</Label>
+                <RadioGroup
+                  value={role}
+                  onValueChange={(value) => setRole(value as UserRole)}
+                  className="grid grid-cols-2 gap-4"
+                >
+                  <div className="flex items-center space-x-2 border rounded-lg p-4 hover:bg-accent/50 cursor-pointer">
+                    <RadioGroupItem value="ngo" id="ngo" />
+                    <Label htmlFor="ngo" className="flex items-center space-x-2 cursor-pointer">
+                      <Heart className="w-4 h-4 text-primary" />
+                      <span>NGO</span>
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2 border rounded-lg p-4 hover:bg-accent/50 cursor-pointer">
+                    <RadioGroupItem value="mnc" id="mnc" />
+                    <Label htmlFor="mnc" className="flex items-center space-x-2 cursor-pointer">
+                      <Building className="w-4 h-4 text-primary" />
+                      <span>MNC</span>
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
+              
               <div className="space-y-2">
                 <Label htmlFor="name">Full Name</Label>
                 <Input
@@ -95,6 +149,18 @@ const Signup = () => {
                   type="text"
                   placeholder="John Doe"
                   value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="bg-background/50"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="organizationName">Organization Name</Label>
+                <Input
+                  id="organizationName"
+                  type="text"
+                  placeholder={role === 'ngo' ? 'Green Earth Foundation' : 'Global Corp Inc.'}
+                  value={formData.organizationName}
                   onChange={handleInputChange}
                   required
                   className="bg-background/50"

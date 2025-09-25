@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import { 
   Waves, 
   Shield, 
@@ -12,6 +13,8 @@ import {
   Database
 } from "lucide-react";
 
+const Spline = lazy(() => import('@splinetool/react-spline'));
+
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -19,6 +22,16 @@ const Index = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 hero-gradient"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(194_95%_48%_/_0.1)_0%,transparent_50%)] opacity-20"></div>
+        
+        {/* Spline 3D Background */}
+        <div className="absolute inset-0 z-0">
+          <Suspense fallback={<div className="w-full h-full bg-gradient-to-b from-ocean-blue/20 to-deep-ocean/20" />}>
+            <Spline 
+              scene="https://prod.spline.design/6Ek3dwz5JQfKVWpU/scene.splinecode" 
+              className="w-full h-full opacity-40"
+            />
+          </Suspense>
+        </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">

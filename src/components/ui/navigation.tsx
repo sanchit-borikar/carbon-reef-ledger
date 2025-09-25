@@ -99,7 +99,10 @@ export const Navigation = ({ userRole, onSignOut }: NavigationProps) => {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                onClick={onSignOut}
+                onClick={() => {
+                  console.log('Desktop sign out clicked');
+                  onSignOut();
+                }}
                 className="text-muted-foreground hover:text-foreground"
               >
                 <LogOut className="w-4 h-4 mr-2" />
@@ -166,6 +169,7 @@ export const Navigation = ({ userRole, onSignOut }: NavigationProps) => {
                   variant="ghost" 
                   size="sm" 
                   onClick={() => {
+                    console.log('Mobile sign out clicked');
                     onSignOut();
                     setIsOpen(false);
                   }}

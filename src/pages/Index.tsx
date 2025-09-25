@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Suspense, lazy } from "react";
 import { 
   Waves, 
   Shield, 
@@ -13,8 +12,6 @@ import {
   Database
 } from "lucide-react";
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
-
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -23,14 +20,20 @@ const Index = () => {
         <div className="absolute inset-0 hero-gradient"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(194_95%_48%_/_0.1)_0%,transparent_50%)] opacity-20"></div>
         
-        {/* Spline 3D Background */}
+        {/* Animated Ocean Background */}
         <div className="absolute inset-0 z-0">
-          <Suspense fallback={<div className="w-full h-full bg-gradient-to-b from-ocean-blue/20 to-deep-ocean/20" />}>
-            <Spline 
-              scene="https://prod.spline.design/6Ek3dwz5JQfKVWpU/scene.splinecode" 
-              className="w-full h-full opacity-40"
-            />
-          </Suspense>
+          <div className="ocean-animation">
+            <div className="wave wave1"></div>
+            <div className="wave wave2"></div>
+            <div className="wave wave3"></div>
+            <div className="floating-bubbles">
+              <div className="bubble bubble1"></div>
+              <div className="bubble bubble2"></div>
+              <div className="bubble bubble3"></div>
+              <div className="bubble bubble4"></div>
+              <div className="bubble bubble5"></div>
+            </div>
+          </div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">

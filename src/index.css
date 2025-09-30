@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Blue Carbon Ledger Design System - Dark Theme
+All colors MUST be HSL for blockchain/environmental theme.
+*/
+
+@layer base {
+  :root {
+    /* Dark theme - Ocean depths and blue carbon theme */
+    --background: 217 33% 5%;
+    --foreground: 210 40% 95%;
+
+    --card: 217 33% 8%;
+    --card-foreground: 210 40% 92%;
+
+    --popover: 217 33% 8%;
+    --popover-foreground: 210 40% 95%;
+
+    /* Blue carbon primary - Deep ocean blue */
+    --primary: 194 95% 48%;
+    --primary-foreground: 217 33% 5%;
+
+    /* Teal secondary for environmental accent */
+    --secondary: 217 33% 15%;
+    --secondary-foreground: 210 40% 95%;
+
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 16% 65%;
+
+    /* Green accent for environmental actions */
+    --accent: 142 71% 45%;
+    --accent-foreground: 217 33% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 18%;
+    --input: 217 33% 15%;
+    --ring: 194 95% 48%;
+
+    --radius: 0.75rem;
+
+    /* Blue Carbon specific colors */
+    --ocean-blue: 194 95% 48%;
+    --deep-ocean: 217 33% 5%;
+    --teal-accent: 174 72% 56%;
+    --carbon-gold: 45 93% 58%;
+    --success-green: 142 71% 45%;
+    --warning-amber: 38 92% 58%;
+
+    /* Gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(194 95% 48%), hsl(174 72% 56%));
+    --gradient-carbon: linear-gradient(135deg, hsl(217 33% 8%), hsl(194 95% 48% / 0.1));
+    --gradient-hero: linear-gradient(135deg, hsl(217 33% 5%), hsl(194 95% 48% / 0.05));
+
+    /* Shadows and effects */
+    --shadow-ocean: 0 10px 40px hsl(194 95% 48% / 0.2);
+    --shadow-card: 0 4px 20px hsl(217 33% 5% / 0.3);
+    --glow-blue: 0 0 30px hsl(194 95% 48% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Force dark theme always - Blue Carbon app */
+  .light, html {
+    /* Same as root - always dark theme */
+    --background: 217 33% 5%;
+    --foreground: 210 40% 95%;
+    --card: 217 33% 8%;
+    --card-foreground: 210 40% 92%;
+    --popover: 217 33% 8%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 194 95% 48%;
+    --primary-foreground: 217 33% 5%;
+    --secondary: 217 33% 15%;
+    --secondary-foreground: 210 40% 95%;
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 16% 65%;
+    --accent: 142 71% 45%;
+    --accent-foreground: 217 33% 5%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  /* Force dark theme */
+  html {
+    color-scheme: dark;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.8);
+  }
+}
+
+@layer components {
+  /* Blue Carbon specific component styles */
+  .ocean-gradient {
+    background: var(--gradient-ocean);
+  }
+  
+  .carbon-gradient {
+    background: var(--gradient-carbon);
+  }
+  
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .ocean-glow {
+    box-shadow: var(--glow-blue);
+  }
+  
+  .glass-card {
+    background: hsl(var(--card) / 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  /* Ocean Animation Styles */
+  .ocean-animation {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wave {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, hsl(var(--ocean-blue) / 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .wave1 {
+    top: -50%;
+    left: -25%;
+    animation-delay: 0s;
+    background: radial-gradient(ellipse at center, hsl(var(--ocean-blue) / 0.08) 0%, transparent 70%);
+  }
+
+  .wave2 {
+    top: -60%;
+    left: -40%;
+    animation-delay: 2s;
+    background: radial-gradient(ellipse at center, hsl(var(--teal-accent) / 0.06) 0%, transparent 70%);
+  }
+
+  .wave3 {
+    top: -70%;
+    left: -30%;
+    animation-delay: 4s;
+    background: radial-gradient(ellipse at center, hsl(var(--deep-ocean) / 0.05) 0%, transparent 70%);
+  }
+
+  .floating-bubbles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .bubble {
+    position: absolute;
+    background: radial-gradient(circle, hsl(var(--teal-accent) / 0.3) 0%, hsl(var(--ocean-blue) / 0.1) 70%);
+    border-radius: 50%;
+    animation: bubble-float 8s ease-in-out infinite;
+  }
+
+  .bubble1 {
+    width: 60px;
+    height: 60px;
+    left: 10%;
+    bottom: -60px;
+    animation-delay: 0s;
+  }
+
+  .bubble2 {
+    width: 40px;
+    height: 40px;
+    left: 80%;
+    bottom: -40px;
+    animation-delay: 2s;
+  }
+
+  .bubble3 {
+    width: 80px;
+    height: 80px;
+    left: 60%;
+    bottom: -80px;
+    animation-delay: 4s;
+  }
+
+  .bubble4 {
+    width: 30px;
+    height: 30px;
+    left: 30%;
+    bottom: -30px;
+    animation-delay: 6s;
+  }
+
+  .bubble5 {
+    width: 50px;
+    height: 50px;
+    left: 50%;
+    bottom: -50px;
+    animation-delay: 1s;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(180deg);
+    }
+  }
+
+  @keyframes bubble-float {
+    0% {
+      transform: translateY(0) scale(0);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) scale(1);
+      opacity: 0;
+    }
+  }
+}

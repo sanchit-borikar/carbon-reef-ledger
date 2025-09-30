@@ -1,73 +1,150 @@
-# Welcome to your Lovable project
+🌊 Blue Carbon Ledger
+A Blockchain-Based Blue Carbon Registry and MRV System providing verifiable truth for carbon credits.
 
-## Project info
+This project was developed by Team Syntax (Team ID: 738) for the Smart India Hackathon 2025 (Problem Statement ID: SIH25038).
 
-**URL**: https://lovable.dev/projects/1dd70d26-81cd-47a7-bf30-ba9aaced09e8
+🧐 About the Project
+Blue carbon ecosystems—like mangroves, seagrasses, and wetlands—are Earth's most powerful natural carbon sinks, storing up to 5 times more carbon per hectare than tropical forests. Despite their critical role in mitigating climate change, India lacks a credible system to measure, verify, and monetize the carbon these habitats store.
 
-## How can I edit this code?
+Blue Carbon Ledger addresses this gap by creating a transparent, fraud-proof, and efficient platform. We leverage Blockchain, AI, and satellite data to connect conservation projects directly with corporations and investors, building a trustworthy marketplace for blue carbon credits. Our mission is to unlock the economic potential of marine conservation and accelerate climate action.
 
-There are several ways of editing your application.
+✨ Key Features
+Our platform is designed to be a comprehensive solution, offering unique features that set it apart from existing carbon credit systems:
 
-**Use Lovable**
+🔗 Immutable Blockchain Registry: Verified carbon credits are minted as NFTs on the Polygon blockchain, ensuring complete transparency, traceability, and eliminating the risk of double-counting.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/1dd70d26-81cd-47a7-bf30-ba9aaced09e8) and start prompting.
+🛰️ AI-Powered MRV: Our system uses PyTorch and XGBoost models to analyze satellite imagery and biodiversity data (soil quality, fish population) for robust Monitoring, Reporting, and Verification (MRV), reducing manual overhead by up to 70%.
 
-Changes made via Lovable will be committed automatically to this repo.
+🇮🇳 Government Integration: We verify land ownership for restoration projects by integrating with official Land Record Certificates (SATBARA) via OCR and Generative AI, preventing greenwashing.
 
-**Use your preferred IDE**
+📈 Global Analytics Dashboard: An interactive dashboard provides real-time data on carbon credit pricing, market liquidity, trading history, and overall climate impact for all stakeholders (Corporates, NGOs, and Government).
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🤖 AI-Powered Assistants:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+A Generative AI Report Assistant standardizes and automates the creation of MRV reports from raw data.
 
-Follow these steps:
+An AI Chat Assistant provides instant support and knowledge access for all platform users.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+🌱 Smart Biodiversity Index: A unique AI-powered index that provides a precise calculation of credits (1 Credit = 1 Ton CO₂ absorbed) based on holistic ecosystem health metrics.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+🛠️ Tech Stack
+We use a modern, robust, and scalable technology stack to power the Blue Carbon Ledger.
 
-# Step 3: Install the necessary dependencies.
-npm i
+Category
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Technologies
 
-**Edit a file directly in GitHub**
+Frontend
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+React.js, Axios, Ethers.js, TailwindCSS
 
-**Use GitHub Codespaces**
+Backend
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Node.js, Python, FastAPI
 
-## What technologies are used for this project?
+Blockchain
 
-This project is built with:
+Polygon, Solidity, Truffle
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Database & Storage
 
-## How can I deploy this project?
+MongoDB, Redis (for caching), IPFS (via Pinata for decentralized storage)
 
-Simply open [Lovable](https://lovable.dev/projects/1dd70d26-81cd-47a7-bf30-ba9aaced09e8) and click on Share -> Publish.
+AI / ML
 
-## Can I connect a custom domain to my Lovable project?
+PyTorch, XGBoost
 
-Yes, you can!
+Authentication
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+JSON Web Tokens (JWT)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Infrastructure
+
+AWS, Supabase
+
+🏛️ System Architecture
+Our platform is built on a sophisticated, end-to-end architecture ensuring data integrity, transparency, and efficiency.
+
+Workflow:
+
+Data Submission: NGOs and local communities upload project details, monitoring data, and drone/satellite imagery.
+
+Backend Processing: The Node.js backend performs initial duplicate checks, verifies land ownership via government records, and stores metadata in MongoDB and large files on IPFS.
+
+AI Validation: The ML Server, powered by FastAPI, analyzes the submitted data using PyTorch and XGBoost models to calculate the carbon credit value and detect anomalies or fraud.
+
+Credit Minting: Once validated, a smart contract written in Solidity is executed on the Polygon network to mint a unique Carbon Credit NFT.
+
+Marketplace & Dashboard: The minted NFT is sent to the stakeholder's wallet and becomes available for trading. Corporations can view, buy, and retire credits via the ReactJS dashboard.
+
+Analytics: The AWS Analytics Engine provides real-time credit pricing, market trends, and generates global impact reports.
+
+🚀 Getting Started
+To get a local copy up and running, follow these simple steps.
+
+Prerequisites
+Make sure you have the following installed on your machine:
+
+Node.js (v18.x or later)
+
+Yarn or npm
+
+Python (v3.9 or later)
+
+Docker (Optional, for containerized setup)
+
+Installation
+Clone the repo
+
+git clone [https://github.com/sanchit-borikar/carbon-reef-ledger.git](https://github.com/sanchit-borikar/carbon-reef-ledger.git)
+cd carbon-reef-ledger
+
+Install Frontend Dependencies
+
+cd client
+npm install
+
+Install Backend Dependencies
+
+cd ../server
+npm install
+
+Set up Environment Variables
+Create a .env file in both the client and server directories. Refer to the .env.example files for the required variables.
+
+Run the Application
+
+Run Frontend:
+
+cd client && npm start
+
+Run Backend:
+
+cd server && npm start
+
+🤝 Contributing
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+Fork the Project
+
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+
+Push to the Branch (git push origin feature/AmazingFeature)
+
+Open a Pull Request
+
+📧 Contact
+Team Syntax
+Sanchit Borikar
+Veer Gandhi
+Tanuja Gawali
+Samruddhi Chavan
+Sumit Gavali
+Harshal Bhonde
+
+Project Link: https://github.com/sanchit-borikar/carbon-reef-ledger
